@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== DEFAULT THEME (Purple) ========== */
+:root {
+  --color-bg: #181424;
+  --color-sidebar: #14101e;
+  --color-card: #2c2243;
+  --color-card-hover: #382b56;
+  --color-card-active: #48376e;
+  --color-accent: #7b52ff;
+  --color-accent-hover: #8f6aff;
+  --color-text: #ffffff;
+  --color-subtext: #a098be;
+}
+
+/* ========== MONOCHROME THEME (Black & White) ========== */
+[data-theme="mono"] {
+  --color-bg: #0a0a0a;
+  --color-sidebar: #111111;
+  --color-card: #1e1e1e;
+  --color-card-hover: #2a2a2a;
+  --color-card-active: #333333;
+  --color-accent: #ffffff;
+  --color-accent-hover: #e0e0e0;
+  --color-text: #ffffff;
+  --color-subtext: #888888;
+}
+
+body {
+  overflow: hidden;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mono theme accent overrides */
+[data-theme="mono"] .shadow-purple-900\/30,
+[data-theme="mono"] .shadow-purple-900\/40,
+[data-theme="mono"] .shadow-purple-950\/40 {
+  --tw-shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="mono"] .text-yandex-accent {
+  color: #ffffff;
+}
+
+[data-theme="mono"] .bg-yandex-accent {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+[data-theme="mono"] .border-yandex-accent {
+  border-color: #ffffff;
+}
+
+[data-theme="mono"] .border-yandex-accent\/40,
+[data-theme="mono"] .border-yandex-accent\/60 {
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* Mono: fix colored text inside accent buttons */
+[data-theme="mono"] .bg-yandex-accent * {
+  color: #000000;
+}

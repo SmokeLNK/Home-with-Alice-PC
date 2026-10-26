@@ -1,0 +1,74 @@
+{
+  "name": "sm-home-pc",
+  "version": "1.0.0",
+  "description": "Дом с Алисой - Windows Desktop приложение для управления умным домом",
+  "main": "dist-electron/main.js",
+  "author": "smokelnk",
+  "scripts": {
+    "dev": "vite",
+    "build:renderer": "tsc && vite build",
+    "build:electron": "tsc -p tsconfig.electron.json",
+    "build": "npm run build:renderer && npm run build:electron",
+    "dist": "npm run build && electron-builder --win",
+    "postdist": "node -e \"const fs = require('fs'); fs.rmSync('dist/win-unpacked', {recursive: true, force: true}); fs.readdirSync('dist').forEach(f => { if (f.endsWith('.blockmap') || f.endsWith('.yml') || f.endsWith('.yaml') || f.startsWith('.')) fs.rmSync('dist/' + f, {recursive: true, force: true}); });\"",
+    "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.yandex.smhome.pc",
+    "productName": "Дом с Алисой PC",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "dist-vite/**/*",
+      "dist-electron/**/*",
+      "readme.txt"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "public/icon.ico",
+      "artifactName": "Home with Alice PC Setup ${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Дом с Алисой PC",
+      "installerIcon": "public/icon.ico",
+      "uninstallerIcon": "public/icon.ico",
+      "installerHeaderIcon": "public/icon.ico",
+      "include": "installer.nsh",
+      "deleteAppDataOnUninstall": false,
+      "menuCategory": "Умный дом",
+      "license": null
+    }
+  },
+  "dependencies": {
+    "lucide-react": "^0.344.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.18",
+    "electron": "^45.0.0",
+    "electron-builder": "^24.13.3",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.4",
+    "vite-plugin-electron": "^0.28.2",
+    "vite-plugin-electron-renderer": "^0.14.5"
+  }
+}
